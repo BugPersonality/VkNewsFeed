@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol NewsfeedCodeCellDelegate: AnyObject {
+    func revealPost(for cell: NewsfeedCodeCell)
+}
+
 class NewsfeedCodeCell: UITableViewCell {
 
     static let reuseId = "NewsfeedCodeCell"
+
+    weak var delegate: NewsfeedCodeCellDelegate?
 
     // MARK: - First Layer
 
@@ -36,6 +42,18 @@ class NewsfeedCodeCell: UITableViewCell {
         postLabel.font = Constants.postLabelFont
         return postLabel
     }()
+
+    let moreTextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        button.setTitleColor(#colorLiteral(red: 0.4, green: 0.6235294118, blue: 0.831372549, alpha: 1), for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
+        button.setTitle("Показать полностью...", for: .normal)
+        return button
+    }()
+
+    let galleryCollectionView = GalleryCollectionView()
 
     let postImageView: WebImageView = {
         let imageView = WebImageView()
@@ -175,11 +193,17 @@ class NewsfeedCodeCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
+        moreTextButton.addTarget(self, action: #selector(moreTextButtonTouchUpInside), for: .touchUpInside)
+
         overlayFirstLayer()
         overlaySecondtLayer()
         overlayThirdtLayerTopView()
         overlayThirdtLayerBottomView()
         overlayFourthLayerOnBottomViewView()
+    }
+
+    @objc private func moreTextButtonTouchUpInside() {
+        delegate?.revealPost(for: self)
     }
 
     // MARK: - Set view model
@@ -194,16 +218,25 @@ class NewsfeedCodeCell: UITableViewCell {
         sharesLabel.text = viewModel.shares
         viewsLabel.text = viewModel.views
 
-        if let photoAttachment = viewModel.photoAttachment {
+        if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
             postImageView.set(imageUrl: photoAttachment.photoUrlString)
             postImageView.isHidden = false
+            galleryCollectionView.isHidden = true
+            postImageView.frame = viewModel.sizes.attachmentFrame
+        } else if viewModel.photoAttachments.count > 1 {
+            galleryCollectionView.frame = viewModel.sizes.attachmentFrame
+            postImageView.isHidden = true
+            galleryCollectionView.isHidden = false
+            galleryCollectionView.set(photos: viewModel.photoAttachments)
         } else {
             postImageView.isHidden = true
+            galleryCollectionView.isHidden = true
         }
 
         postLabel.frame = viewModel.sizes.postLabelFrame
         postImageView.frame = viewModel.sizes.attachmentFrame
         bottomView.frame = viewModel.sizes.bottomViewFrame
+        moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
     }
 
     // MARK: - Prepare for Reuse
@@ -320,7 +353,9 @@ class NewsfeedCodeCell: UITableViewCell {
     private func overlaySecondtLayer() {
         cardView.addSubview(topView)
         cardView.addSubview(postLabel)
+        cardView.addSubview(moreTextButton)
         cardView.addSubview(postImageView)
+        cardView.addSubview(galleryCollectionView)
         cardView.addSubview(bottomView)
 
         // TopView Constraints
@@ -332,7 +367,7 @@ class NewsfeedCodeCell: UITableViewCell {
     }
 
     private func overlayFirstLayer() {
-        addSubview(cardView)
+        contentView.addSubview(cardView)
         cardView.fillSuperview(padding: Constants.cardInsets)
     }
 
