@@ -36,11 +36,19 @@ class NewsfeedCodeCell: UITableViewCell {
         return topView
     }()
 
-    let postLabel: UILabel = {
-        let postLabel = UILabel()
-        postLabel.numberOfLines = 0
-        postLabel.font = Constants.postLabelFont
-        return postLabel
+    let postLabel: UITextView = {
+        let textView = UITextView()
+        textView.font = Constants.postLabelFont
+        textView.isScrollEnabled = false
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
+        textView.isEditable = false
+
+        let padding = textView.textContainer.lineFragmentPadding
+        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
+
+        textView.dataDetectorTypes = .all
+        return textView
     }()
 
     let moreTextButton: UIButton = {

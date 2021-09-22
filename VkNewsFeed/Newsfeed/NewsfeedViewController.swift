@@ -20,6 +20,14 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
 
     @IBOutlet weak var table: UITableView!
 
+    private var titleView = TitleView()
+
+    private var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
+
     // MARK: Setup
 
     private func setup() {
@@ -41,12 +49,32 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setUpTopBars()
+        setupTable()
+
+        view.backgroundColor = #colorLiteral(red: 0.5916191339, green: 0.6367691755, blue: 0.6830073595, alpha: 1)
+
+        interactor?.makeRequest(request: .getNewsfeed)
+        interactor?.makeRequest(request: .getUser)
+    }
+
+    private func setupTable() {
+        let topInset: CGFloat = 8
+        table.contentInset.top = topInset
 
         table.separatorStyle = .none
         table.backgroundColor = .clear
-        view.backgroundColor = #colorLiteral(red: 0.5916191339, green: 0.6367691755, blue: 0.6830073595, alpha: 1)
-
         table.register(NewsfeedCodeCell.self, forCellReuseIdentifier: NewsfeedCodeCell.reuseId)
+        table.addSubview(refreshControl)
+    }
+
+    private func setUpTopBars() {
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.titleView = titleView
+    }
+
+    @objc private func refresh() {
         interactor?.makeRequest(request: .getNewsfeed)
     }
 
@@ -55,6 +83,15 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
         case .displayNewsfeed(let feedViewModel):
             self.feedViewModel = feedViewModel
             table.reloadData()
+            refreshControl.endRefreshing()
+        case .displayUser(userViewModel: let userViewModel):
+            titleView.set(userViewModel: userViewModel)
+        }
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+            interactor?.makeRequest(request: .getNextBatch)
         }
     }
 

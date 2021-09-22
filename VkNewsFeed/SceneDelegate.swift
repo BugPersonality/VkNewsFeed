@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
         window?.rootViewController = authVC
         window?.makeKeyAndVisible()
     }
+
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
@@ -49,11 +50,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) {
     }
+
     // MARK: - AuthServiceDelegate
+
     func authServiceShouldShow(viewController: UIViewController) {
         print(#function)
         window?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
+
     func authServiceSignIn() {
         print(#function)
         let feedVC: NewsfeedViewController = (UIStoryboard(name: "NewsfeedViewController",
@@ -67,4 +71,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
     func authServiceSignInDidFail() {
         print(#function)
     }
+
 }
