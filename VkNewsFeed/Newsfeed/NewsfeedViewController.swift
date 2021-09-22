@@ -3,7 +3,7 @@
 //  VkNewsFeed
 //
 //  Created by Данил Дубов on 17.09.2021.
-//  Copyright (c) 2021 ___ORGANIZATIONNAME___. All rights reserved.
+//  Copyright (c) 2021 ___ORGANIZATIONNAME___. Arjed.
 //
 
 import UIKit
@@ -16,11 +16,12 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     var interactor: NewsfeedBusinessLogic?
     var router: (NSObjectProtocol & NewsfeedRoutingLogic)?
 
-    private var feedViewModel = FeedViewModel.init(cells: [])
+    private var feedViewModel = FeedViewModel.init(cells: [], footerTitle: nil)
 
     @IBOutlet weak var table: UITableView!
 
     private var titleView = TitleView()
+    private lazy var footerView = FooterView()
 
     private var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -66,6 +67,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
         table.backgroundColor = .clear
         table.register(NewsfeedCodeCell.self, forCellReuseIdentifier: NewsfeedCodeCell.reuseId)
         table.addSubview(refreshControl)
+        table.tableFooterView = footerView
     }
 
     private func setUpTopBars() {
@@ -84,8 +86,11 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
             self.feedViewModel = feedViewModel
             table.reloadData()
             refreshControl.endRefreshing()
+            footerView.setTitle(feedViewModel.footerTitle)
         case .displayUser(userViewModel: let userViewModel):
             titleView.set(userViewModel: userViewModel)
+        case .displayFooterLoader:
+            footerView.showLoader()
         }
     }
 

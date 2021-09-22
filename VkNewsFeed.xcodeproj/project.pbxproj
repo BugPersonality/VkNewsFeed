@@ -27,6 +27,8 @@
 		24934ACC26FA6E7E00F53CAA /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24934ACB26FA6E7E00F53CAA /* TitleView.swift */; };
 		24934ACE26FA6F2B00F53CAA /* InsetableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24934ACD26FA6F2B00F53CAA /* InsetableTextField.swift */; };
 		24934AD026FA74C400F53CAA /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24934ACF26FA74C400F53CAA /* UserResponse.swift */; };
+		24934AD326FB91A800F53CAA /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24934AD226FB91A800F53CAA /* FooterView.swift */; };
+		24934AD526FB955400F53CAA /* Localizable.stringdict.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 24934AD426FB955400F53CAA /* Localizable.stringdict.stringsdict */; };
 		24947C7A26F4A75A005A4BE2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24947C7926F4A75A005A4BE2 /* NetworkService.swift */; };
 		24947C7C26F4A812005A4BE2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24947C7B26F4A812005A4BE2 /* API.swift */; };
 		24947C7F26F4B509005A4BE2 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24947C7E26F4B509005A4BE2 /* FeedResponse.swift */; };
@@ -80,6 +82,8 @@
 		24934ACB26FA6E7E00F53CAA /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		24934ACD26FA6F2B00F53CAA /* InsetableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetableTextField.swift; sourceTree = "<group>"; };
 		24934ACF26FA74C400F53CAA /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		24934AD226FB91A800F53CAA /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		24934AD426FB955400F53CAA /* Localizable.stringdict.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringdict.stringsdict; sourceTree = "<group>"; };
 		24947C7926F4A75A005A4BE2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		24947C7B26F4A812005A4BE2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		24947C7E26F4B509005A4BE2 /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				2483148D26F1EBC600A1A5ED /* Assets.xcassets */,
 				2483148F26F1EBC600A1A5ED /* LaunchScreen.storyboard */,
 				2483149226F1EBC600A1A5ED /* Info.plist */,
+				24934AD426FB955400F53CAA /* Localizable.stringdict.stringsdict */,
 			);
 			path = VkNewsFeed;
 			sourceTree = "<group>";
@@ -204,6 +209,14 @@
 			path = TitleView;
 			sourceTree = "<group>";
 		};
+		24934AD126FB919B00F53CAA /* FooterView */ = {
+			isa = PBXGroup;
+			children = (
+				24934AD226FB91A800F53CAA /* FooterView.swift */,
+			);
+			path = FooterView;
+			sourceTree = "<group>";
+		};
 		24947C7826F49C20005A4BE2 /* AuthViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +238,7 @@
 		24947CB326F4E552005A4BE2 /* Newsfeed */ = {
 			isa = PBXGroup;
 			children = (
+				24934AD126FB919B00F53CAA /* FooterView */,
 				24934ACA26FA6E6B00F53CAA /* TitleView */,
 				24934AC326F9E5E900F53CAA /* GalleryView */,
 				24934AC026F739AF00F53CAA /* CodeCell */,
@@ -334,6 +348,7 @@
 				248314A226F25CC500A1A5ED /* AuthViewController.storyboard in Resources */,
 				2483148E26F1EBC600A1A5ED /* Assets.xcassets in Resources */,
 				24947CCA26F4F1FD005A4BE2 /* NewsfeedCell.xib in Resources */,
+				24934AD526FB955400F53CAA /* Localizable.stringdict.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24934AC926FA59D800F53CAA /* RowLayout.swift in Sources */,
+				24934AD326FB91A800F53CAA /* FooterView.swift in Sources */,
 				24947C7F26F4B509005A4BE2 /* FeedResponse.swift in Sources */,
 				24934ABB26F5E6AF00F53CAA /* String + Height.swift in Sources */,
 				24934AC226F73F6700F53CAA /* NewsfeedCellConstants.swift in Sources */,
