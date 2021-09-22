@@ -16,6 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-2l-uIk" customClass="GradientView" customModule="VkNewsFeed" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ErO-HQ-HMa">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -26,12 +30,16 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ErO-HQ-HMa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4l0-kI-vMY"/>
+                            <constraint firstItem="G9w-2l-uIk" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="B1E-8b-fyO"/>
+                            <constraint firstItem="G9w-2l-uIk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Icr-ul-UIR"/>
                             <constraint firstItem="ErO-HQ-HMa" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Kvm-fy-tRM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ErO-HQ-HMa" secondAttribute="trailing" id="R4O-HV-fJ9"/>
+                            <constraint firstItem="G9w-2l-uIk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="aHd-Yq-51i"/>
                             <constraint firstItem="ErO-HQ-HMa" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="34" id="mWb-N7-cQn"/>
+                            <constraint firstItem="G9w-2l-uIk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zHv-nP-gZh"/>
                         </constraints>
                     </view>
                     <connections>
@@ -40,15 +48,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1184" y="95"/>
+            <point key="canvasLocation" x="-1184.0579710144928" y="94.419642857142847"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

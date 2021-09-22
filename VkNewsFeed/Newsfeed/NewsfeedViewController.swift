@@ -53,8 +53,6 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
         setUpTopBars()
         setupTable()
 
-        view.backgroundColor = #colorLiteral(red: 0.5916191339, green: 0.6367691755, blue: 0.6830073595, alpha: 1)
-
         interactor?.makeRequest(request: .getNewsfeed)
         interactor?.makeRequest(request: .getUser)
     }
@@ -71,6 +69,10 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     }
 
     private func setUpTopBars() {
+        let topBar = UIView(frame: UIApplication.shared.statusBarFrame)
+        topBar.backgroundColor = .white
+        self.view.addSubview(topBar)
+
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.titleView = titleView
